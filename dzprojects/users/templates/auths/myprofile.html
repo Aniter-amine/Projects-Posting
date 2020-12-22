@@ -1,0 +1,140 @@
+{% extends 'layout.html' %}
+{% block title %}Dz Coders - My Profile{% endblock %}
+
+{% block content %}
+<div class="container">
+    <form method="POST" action="" enctype="multipart/form-data">
+        {% csrf_token %}
+    <div class="row my-2">
+        <div class="col-lg-8 order-lg-2">
+            <ul class="nav nav-tabs">
+                <li class="nav-item">
+                    <a href="" data-target="#profile" data-toggle="tab" class="nav-link active">Profile</a>
+                </li>
+                <li class="nav-item">
+                    <a href="" data-target="#messages" data-toggle="tab" class="nav-link">Messages</a>
+                </li>
+                <li class="nav-item">
+                    <a href="" data-target="#edit" data-toggle="tab" class="nav-link">Edit</a>
+                </li>
+            </ul>
+            <div class="tab-content py-4">
+                <div class="tab-pane active" id="profile">
+                    <h5 class="mb-3">User Profile</h5>
+                    <div class="row">
+                        <div class="col-md-6">
+                            <h6>About</h6>
+                            <p>
+                                Work: {{ request.user.prof.work }}
+                            </p>
+                            <h6>Username: {{ request.user.username }}</h6>
+                            <p>
+                                Email: {{ request.user.email }} ...
+                            </p>
+                            <p>
+                                Bio: {{ request.user.prof.bio|slice:":40" }} ...
+                            </p>
+                        </div>
+                        <div class="col-md-6">
+                            <h6>Recent badges</h6>
+                            <a href="#" class="badge badge-dark badge-pill">html5</a>
+                            <a href="#" class="badge badge-dark badge-pill">react</a>
+                            <a href="#" class="badge badge-dark badge-pill">codeply</a>
+                            <a href="#" class="badge badge-dark badge-pill">angularjs</a>
+                            <a href="#" class="badge badge-dark badge-pill">css3</a>
+                            <a href="#" class="badge badge-dark badge-pill">jquery</a>
+                            <a href="#" class="badge badge-dark badge-pill">bootstrap</a>
+                            <a href="#" class="badge badge-dark badge-pill">responsive-design</a>
+                            <hr>
+                            <span class="badge badge-primary"><i class="fa fa-user"></i> 900 Followers</span>
+                            <span class="badge badge-success"><i class="fa fa-cog"></i> 43 Forks</span>
+                            <span class="badge badge-danger"><i class="fa fa-eye"></i>{{ request.user.prof.prof_views }}</span>
+                        </div>
+                    </div>
+                    <!--/row-->
+                </div>
+                <div class="tab-pane" id="messages">
+                    <table class="table table-hover table-striped">
+                        <h1>Coming Soon...</h1>
+                    </table>
+                </div>
+                <div class="tab-pane" id="edit">
+                        <div class="form-group row">
+                            <label class="col-lg-3 col-form-label form-control-label">Nickname</label>
+                            <div class="col-lg-9">
+                                {{ form.nickname }}
+                            </div>
+                        </div>
+                        <div class="form-group row">
+                            <label class="col-lg-3 col-form-label form-control-label">Work</label>
+                            <div class="col-lg-9">
+                                {{ form.work }}
+                            </div>
+                        </div>
+                        <div class="form-group row">
+                            <label class="col-lg-3 col-form-label form-control-label">Phone Number</label>
+                            <div class="col-lg-9">
+                                {{ form.phone }}
+                            </div>
+                        </div>
+                        <div class="form-group row">
+                            <label class="col-lg-3 col-form-label form-control-label">Linkedin</label>
+                            <div class="col-lg-9">
+                                {{ form.linkedin_link }}
+                            </div>
+                        </div>
+                        <div class="form-group row">
+                            <label class="col-lg-3 col-form-label form-control-label">Instagram</label>
+                            <div class="col-lg-9">
+                                {{ form.instagram_link }}
+                            </div>
+                        </div>
+                        <div class="form-group row">
+                            <label class="col-lg-3 col-form-label form-control-label">Facebook</label>
+                            <div class="col-lg-9">
+                                {{ form.facebook_link }}
+                            </div>
+                        </div>
+                        <div class="form-group row">
+                            <label class="col-lg-3 col-form-label form-control-label">Youtube</label>
+                            <div class="col-lg-9">
+                                {{ form.youtube_link }}
+                            </div>
+                        </div>
+                        <div class="form-group row">
+                            <label class="col-lg-3 col-form-label form-control-label">Twitter</label>
+                            <div class="col-lg-6">
+                                {{ form.twitter_link }}
+                            </div>
+                        </div>
+                        <div class="form-group row">
+                            <label class="col-lg-3 col-form-label form-control-label">Bio</label>
+                            <div class="col-lg-6">
+                                {{ form.bio }}
+                            </div>
+                        </div>
+                        <div class="form-group row">
+                            <label class="col-lg-3 col-form-label form-control-label"></label>
+                            <div class="col-lg-9">
+                                <input type="reset" class="btn btn-secondary" value="Cancel">
+                                <input type="submit" class="btn btn-primary" value="Save Changes">
+                            </div>
+                        </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-lg-4 order-lg-1 text-center">
+            {% if request.user.prof.image %}
+                <img src="{{ request.user.prof.image.url }}" class="mx-auto img-fluid img-circle d-block" alt="avatar">
+            {% endif %}
+            <h6 class="mt-2">Upload a different photo</h6>
+            <label class="custom-file">
+                {{ form.image }}
+                <span class="custom-file-control">Choose file</span>
+            </label>
+        </div>
+    </div>
+</form>
+</div>
+
+{% endblock %}
